@@ -4,7 +4,7 @@ import { NextResponse, type NextRequest } from "next/server";
 const AUTH_PATHS = ["/login", "/register"];
 
 export async function middleware(req: NextRequest) {
-  const token = req.cookies.get("authToken")?.value;
+  const token = req.cookies.get("authNextToken")?.value;
   const url = req.nextUrl.clone();
 
   // Jika belum login
@@ -22,7 +22,7 @@ export async function middleware(req: NextRequest) {
 
       if (!res.ok) {
         const response = NextResponse.redirect(new URL("/login", req.url));
-        response.cookies.delete("authToken");
+        response.cookies.delete("authNextToken");
         return response;
       }
 
@@ -36,16 +36,17 @@ export async function middleware(req: NextRequest) {
 
       // refresh token expiry 3 hari
       const response = NextResponse.next();
-      response.cookies.set("authToken", token, {
+      response.cookies.set("authNextToken", token, {
         path: "/",
-        httpOnly: false, // biar bisa diakses di client
+        httpOnly: false, // agar bisa diakses di client (interceptor axios)
         maxAge: 3600 * 24 * 3,
       });
+      console.log(response);
       return response;
     } catch (err) {
       console.error("Middleware Error:", err);
       const response = NextResponse.redirect(new URL("/login", req.url));
-      response.cookies.delete("authToken");
+      response.cookies.delete("authNextToken");
       return response;
     }
   }

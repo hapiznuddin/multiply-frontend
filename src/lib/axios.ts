@@ -5,13 +5,14 @@ const api = axios.create({
   withCredentials: false, // ❌ tidak perlu cookie-based session
   headers: {
     Accept: "application/json",
+    "Content-Type": "application/json",
   },
 });
 
 // 🔁 interceptor untuk token dari cookie browser
 api.interceptors.request.use((config) => {
   if (typeof window !== "undefined") {
-    const match = document.cookie.match(/authToken=([^;]+)/);
+    const match = document.cookie.match(/authNextToken=([^;]+)/);
     const token = match ? match[1] : null;
     if (token) config.headers.Authorization = `Bearer ${token}`;
   }
@@ -19,4 +20,3 @@ api.interceptors.request.use((config) => {
 });
 
 export default api;
-
