@@ -1,7 +1,7 @@
 export default function Home() {
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline">Hello, Multiply Quiz!</h1> 
+    <div className="flex min-h-screen items-center justify-center bg-background">
+      <h1 className="text-3xl font-bold underline text-white">Hello, Multiply Quiz!</h1> 
     </div>
   );
 

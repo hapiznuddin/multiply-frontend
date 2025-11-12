@@ -1,41 +1,41 @@
 @import "tailwindcss";
 
 :root {
-  --background: hsl(0 0% 100%);
-  --foreground: hsl(222.2000 84% 4.9000%);
+  --background: hsl(263 70% 50%);
+  --foreground: hsl(210 20% 98%);
   --card: hsl(0 0% 100%);
-  --card-foreground: hsl(222.2000 84% 4.9000%);
+  --card-foreground: hsl(222.2 84% 4.9%);
   --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(222.2000 84% 4.9000%);
+  --popover-foreground: hsl(222.2 84% 4.9%);
   --primary: hsl(263 70% 50%);
   --primary-foreground: hsl(210 20% 98%);
-  --secondary: hsl(28 90% 55.0000%);
+  --secondary: hsl(28 90% 55%);
   --secondary-foreground: hsl(210 20% 98%);
-  --muted: hsl(210 40% 96.1000%);
-  --muted-foreground: hsl(215.4000 16.3000% 46.9000%);
-  --accent: hsl(210 40% 96.1000%);
-  --accent-foreground: hsl(222.2000 47.4000% 11.2000%);
-  --destructive: hsl(0 84.2000% 60.2000%);
+  --muted: hsl(210 40% 96.1%);
+  --muted-foreground: hsl(215.4 16.3% 46.9%);
+  --accent: hsl(210 40% 96.1%);
+  --accent-foreground: hsl(222.2 47.4% 11.2%);
+  --destructive: hsl(0 84.2% 60.2%);
   --destructive-foreground: hsl(210 20% 98%);
-  --border: hsl(214.3000 31.8000% 91.4000%);
-  --input: hsl(214.3000 31.8000% 91.4000%);
+  --border: hsl(214.3 31.8% 91.4%);
+  --input: hsl(214.3 31.8% 91.4%);
   --ring: hsl(263 70% 50%);
   --chart-1: hsl(263 70% 50%);
-  --chart-2: hsl(28 90% 55.0000%);
+  --chart-2: hsl(28 90% 55%);
   --chart-3: hsl(120 70% 40%);
   --chart-4: hsl(40 80% 60%);
   --chart-5: hsl(300 60% 70%);
   --sidebar: hsl(240 5% 96%);
-  --sidebar-foreground: hsl(222.2000 84% 4.9000%);
+  --sidebar-foreground: hsl(222.2 84% 4.9%);
   --sidebar-primary: hsl(263 70% 50%);
   --sidebar-primary-foreground: hsl(210 20% 98%);
-  --sidebar-accent: hsl(28 90% 55.0000%);
+  --sidebar-accent: hsl(28 90% 55%);
   --sidebar-accent-foreground: hsl(210 20% 98%);
-  --sidebar-border: hsl(214.3000 31.8000% 91.4000%);
+  --sidebar-border: hsl(214.3 31.8% 91.4%);
   --sidebar-ring: hsl(263 70% 50%);
   --font-sans: Varela Round, ui-sans-serif, sans-serif, system-ui;
-  --font-serif: 'Playfair Display', serif;
-  --font-mono: 'Fira Code', monospace;
+  --font-serif: "Playfair Display", serif;
+  --font-mono: "Fira Code", monospace;
   --radius: 0.5rem;
   --shadow-x: 0rem;
   --shadow-y: 0.25rem;
@@ -45,14 +45,77 @@
   --shadow-color: hsl(0 0% 0%);
   --shadow-2xs: 0rem 0.25rem 0.5rem 0rem hsl(0 0% 0% / 0.05);
   --shadow-xs: 0rem 0.25rem 0.5rem 0rem hsl(0 0% 0% / 0.05);
-  --shadow-sm: 0rem 0.25rem 0.5rem 0rem hsl(0 0% 0% / 0.10), 0rem 1px 2px -1px hsl(0 0% 0% / 0.10);
-  --shadow: 0rem 0.25rem 0.5rem 0rem hsl(0 0% 0% / 0.10), 0rem 1px 2px -1px hsl(0 0% 0% / 0.10);
-  --shadow-md: 0rem 0.25rem 0.5rem 0rem hsl(0 0% 0% / 0.10), 0rem 2px 4px -1px hsl(0 0% 0% / 0.10);
-  --shadow-lg: 0rem 0.25rem 0.5rem 0rem hsl(0 0% 0% / 0.10), 0rem 4px 6px -1px hsl(0 0% 0% / 0.10);
-  --shadow-xl: 0rem 0.25rem 0.5rem 0rem hsl(0 0% 0% / 0.10), 0rem 8px 10px -1px hsl(0 0% 0% / 0.10);
+  --shadow-sm: 0rem 0.25rem 0.5rem 0rem hsl(0 0% 0% / 0.1),
+    0rem 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow: 0rem 0.25rem 0.5rem 0rem hsl(0 0% 0% / 0.1),
+    0rem 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow-md: 0rem 0.25rem 0.5rem 0rem hsl(0 0% 0% / 0.1),
+    0rem 2px 4px -1px hsl(0 0% 0% / 0.1);
+  --shadow-lg: 0rem 0.25rem 0.5rem 0rem hsl(0 0% 0% / 0.1),
+    0rem 4px 6px -1px hsl(0 0% 0% / 0.1);
+  --shadow-xl: 0rem 0.25rem 0.5rem 0rem hsl(0 0% 0% / 0.1),
+    0rem 8px 10px -1px hsl(0 0% 0% / 0.1);
   --shadow-2xl: 0rem 0.25rem 0.5rem 0rem hsl(0 0% 0% / 0.25);
   --tracking-normal: 0em;
   --spacing: 0.25rem;
+}
+
+.dark {
+  --background: hsl(222.2 84% 4.9%);
+  --foreground: hsl(210 20% 98%);
+  --card: hsl(222.2 84% 4.9%);
+  --card-foreground: hsl(210 20% 98%);
+  --popover: hsl(222.2 84% 4.9%);
+  --popover-foreground: hsl(210 20% 98%);
+  --primary: hsl(263 70% 50%);
+  --primary-foreground: hsl(210 20% 98%);
+  --secondary: hsl(28 90% 55%);
+  --secondary-foreground: hsl(210 20% 98%);
+  --muted: hsl(217.2 32.6% 17.5%);
+  --muted-foreground: hsl(215 20.2% 65.1%);
+  --accent: hsl(217.2 32.6% 17.5%);
+  --accent-foreground: hsl(210 20% 98%);
+  --destructive: hsl(0 62.8% 30.6%);
+  --destructive-foreground: hsl(210 20% 98%);
+  --border: hsl(217.2 32.6% 17.5%);
+  --input: hsl(217.2 32.6% 17.5%);
+  --ring: hsl(263 70% 50%);
+  --chart-1: hsl(263 70% 50%);
+  --chart-2: hsl(28 90% 55%);
+  --chart-3: hsl(120 70% 40%);
+  --chart-4: hsl(40 80% 60%);
+  --chart-5: hsl(300 60% 70%);
+  --sidebar: hsl(220 80% 5%);
+  --sidebar-foreground: hsl(210 20% 98%);
+  --sidebar-primary: hsl(263 70% 50%);
+  --sidebar-primary-foreground: hsl(210 20% 98%);
+  --sidebar-accent: hsl(28 90% 55%);
+  --sidebar-accent-foreground: hsl(210 20% 98%);
+  --sidebar-border: hsl(217.2 32.6% 17.5%);
+  --sidebar-ring: hsl(263 70% 50%);
+  --font-sans: Varela Round, ui-sans-serif, sans-serif, system-ui;
+  --font-serif: "Playfair Display", serif;
+  --font-mono: "Fira Code", monospace;
+  --radius: 0.5rem;
+  --shadow-x: 0rem;
+  --shadow-y: 0.5rem;
+  --shadow-blur: 0.75rem;
+  --shadow-spread: 0rem;
+  --shadow-opacity: 0.5;
+  --shadow-color: hsl(0 0% 0%);
+  --shadow-2xs: 0rem 0.5rem 0.75rem 0rem hsl(0 0% 0% / 0.25);
+  --shadow-xs: 0rem 0.5rem 0.75rem 0rem hsl(0 0% 0% / 0.25);
+  --shadow-sm: 0rem 0.5rem 0.75rem 0rem hsl(0 0% 0% / 0.5),
+    0rem 1px 2px -1px hsl(0 0% 0% / 0.5);
+  --shadow: 0rem 0.5rem 0.75rem 0rem hsl(0 0% 0% / 0.5),
+    0rem 1px 2px -1px hsl(0 0% 0% / 0.5);
+  --shadow-md: 0rem 0.5rem 0.75rem 0rem hsl(0 0% 0% / 0.5),
+    0rem 2px 4px -1px hsl(0 0% 0% / 0.5);
+  --shadow-lg: 0rem 0.5rem 0.75rem 0rem hsl(0 0% 0% / 0.5),
+    0rem 4px 6px -1px hsl(0 0% 0% / 0.5);
+  --shadow-xl: 0rem 0.5rem 0.75rem 0rem hsl(0 0% 0% / 0.5),
+    0rem 8px 10px -1px hsl(0 0% 0% / 0.5);
+  --shadow-2xl: 0rem 0.5rem 0.75rem 0rem hsl(0 0% 0% / 1.25);
 }
 
 @theme inline {
@@ -108,60 +171,7 @@
   --shadow-2xl: var(--shadow-2xl);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-  --background: hsl(222.2000 84% 4.9000%);
-  --foreground: hsl(210 20% 98%);
-  --card: hsl(222.2000 84% 4.9000%);
-  --card-foreground: hsl(210 20% 98%);
-  --popover: hsl(222.2000 84% 4.9000%);
-  --popover-foreground: hsl(210 20% 98%);
-  --primary: hsl(263 70% 50%);
-  --primary-foreground: hsl(210 20% 98%);
-  --secondary: hsl(28 90% 55.0000%);
-  --secondary-foreground: hsl(210 20% 98%);
-  --muted: hsl(217.2000 32.6000% 17.5000%);
-  --muted-foreground: hsl(215 20.2000% 65.1000%);
-  --accent: hsl(217.2000 32.6000% 17.5000%);
-  --accent-foreground: hsl(210 20% 98%);
-  --destructive: hsl(0 62.8000% 30.6000%);
-  --destructive-foreground: hsl(210 20% 98%);
-  --border: hsl(217.2000 32.6000% 17.5000%);
-  --input: hsl(217.2000 32.6000% 17.5000%);
-  --ring: hsl(263 70% 50%);
-  --chart-1: hsl(263 70% 50%);
-  --chart-2: hsl(28 90% 55.0000%);
-  --chart-3: hsl(120 70% 40%);
-  --chart-4: hsl(40 80% 60%);
-  --chart-5: hsl(300 60% 70%);
-  --sidebar: hsl(220 80% 5%);
-  --sidebar-foreground: hsl(210 20% 98%);
-  --sidebar-primary: hsl(263 70% 50%);
-  --sidebar-primary-foreground: hsl(210 20% 98%);
-  --sidebar-accent: hsl(28 90% 55.0000%);
-  --sidebar-accent-foreground: hsl(210 20% 98%);
-  --sidebar-border: hsl(217.2000 32.6000% 17.5000%);
-  --sidebar-ring: hsl(263 70% 50%);
-  --font-sans: Varela Round, ui-sans-serif, sans-serif, system-ui;
-  --font-serif: 'Playfair Display', serif;
-  --font-mono: 'Fira Code', monospace;
-  --radius: 0.5rem;
-  --shadow-x: 0rem;
-  --shadow-y: 0.5rem;
-  --shadow-blur: 0.75rem;
-  --shadow-spread: 0rem;
-  --shadow-opacity: 0.5;
-  --shadow-color: hsl(0 0% 0%);
-  --shadow-2xs: 0rem 0.5rem 0.75rem 0rem hsl(0 0% 0% / 0.25);
-  --shadow-xs: 0rem 0.5rem 0.75rem 0rem hsl(0 0% 0% / 0.25);
-  --shadow-sm: 0rem 0.5rem 0.75rem 0rem hsl(0 0% 0% / 0.50), 0rem 1px 2px -1px hsl(0 0% 0% / 0.50);
-  --shadow: 0rem 0.5rem 0.75rem 0rem hsl(0 0% 0% / 0.50), 0rem 1px 2px -1px hsl(0 0% 0% / 0.50);
-  --shadow-md: 0rem 0.5rem 0.75rem 0rem hsl(0 0% 0% / 0.50), 0rem 2px 4px -1px hsl(0 0% 0% / 0.50);
-  --shadow-lg: 0rem 0.5rem 0.75rem 0rem hsl(0 0% 0% / 0.50), 0rem 4px 6px -1px hsl(0 0% 0% / 0.50);
-  --shadow-xl: 0rem 0.5rem 0.75rem 0rem hsl(0 0% 0% / 0.50), 0rem 8px 10px -1px hsl(0 0% 0% / 0.50);
-  --shadow-2xl: 0rem 0.5rem 0.75rem 0rem hsl(0 0% 0% / 1.25);
-  }
-}
+
 
 body {
   font-family: Varela Round, Helvetica, sans-serif;

@@ -1,42 +1,26 @@
 "use client";
 
-import { useState } from "react";
-import api from "@/lib/axios";
-import { AxiosError } from "axios";
-import type { ApiErrorResponse } from "@/app/types/errorType";
-import { redirect } from "next/navigation";
+import { useActionState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { registerAction } from "./action";
 
 export default function RegisterPage() {
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
-  const [message, setMessage] = useState("");
+  const router = useRouter();
+  const [state, formAction, isPending] = useActionState(registerAction, {
+    error: "",
+  });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      const res = await api.post("/register", form);
-      if (res.status === 201) {
-        redirect("/login");
-      }
-      setMessage("Registrasi berhasil! Silakan login.");
-    } catch (err) {
-      if (err instanceof AxiosError) {
-        const axiosError = err as AxiosError<ApiErrorResponse>;
-        console.log(axiosError);
-        setMessage(axiosError.response?.data?.message || "Login gagal");
-      } else {
-        setMessage("Login gagal");
-      }
+  // 🔁 redirect otomatis setelah login
+  useEffect(() => {
+    if (state.success) {
+      router.replace("/login");
     }
-  };
+  }, [state.success, router]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-green-50">
       <form
-        onSubmit={handleSubmit}
+        action={formAction}
         className="bg-white shadow-lg rounded-xl p-6 w-96 space-y-4"
       >
         <h1 className="text-2xl font-bold text-center">Register</h1>
@@ -45,30 +29,32 @@ export default function RegisterPage() {
           name="name"
           placeholder="Nama"
           className="w-full border p-2 rounded"
-          onChange={handleChange}
+          required
         />
         <input
           type="email"
           name="email"
           placeholder="Email"
           className="w-full border p-2 rounded"
-          onChange={handleChange}
+          required
         />
         <input
           type="password"
           name="password"
           placeholder="Password"
           className="w-full border p-2 rounded"
-          onChange={handleChange}
+          required
         />
         <button
           type="submit"
-          className="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600"
+          disabled={isPending}
+          className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 disabled:opacity-60"
         >
-          Daftar
+          {isPending ? "Memproses..." : "Daftar Akun"}
         </button>
-        {message && (
-          <p className="text-center text-sm text-gray-600">{message}</p>
+
+        {state.error && (
+          <p className="text-center text-red-500 text-sm">{state.error}</p>
         )}
       </form>
     </div>

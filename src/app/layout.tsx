@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${varela.variable} antialiased`}
+        className={`${varela.variable}`}
       >
         {children}
       </body>

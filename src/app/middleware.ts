@@ -17,7 +17,9 @@ export async function middleware(req: NextRequest) {
   if (token) {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/get-user`, {
+        method: "GET",
         headers: { Authorization: `Bearer ${token}` },
+        cache: "no-store",
       });
 
       if (!res.ok) {
@@ -27,10 +29,11 @@ export async function middleware(req: NextRequest) {
       }
 
       const user = await res.json();
-      const roleRoute = getDashboardRoute(user.role);
+      console.log("Middleware user:", user);
 
+      // ✅ Redirect sesuai role
       if (url.pathname === "/" || AUTH_PATHS.includes(url.pathname)) {
-        url.pathname = roleRoute;
+        url.pathname = getDashboardRoute(user.role);
         return NextResponse.redirect(url);
       }
 
@@ -41,7 +44,6 @@ export async function middleware(req: NextRequest) {
         httpOnly: false, // agar bisa diakses di client (interceptor axios)
         maxAge: 3600 * 24 * 3,
       });
-      console.log(response);
       return response;
     } catch (err) {
       console.error("Middleware Error:", err);
