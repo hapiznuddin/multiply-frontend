@@ -12,8 +12,12 @@ export async function loginAction(
   const result = formSchema.safeParse(Object.fromEntries(formData));
 
   if (!result.success) {
-    const firstError = result.error.issues[0];
-    return { error: firstError.message };
+    const error = result.error.issues[0];
+    const fieldErrors = result.error.flatten().fieldErrors;
+    return { 
+      fieldErrors,
+      error: error.message,
+    };
   }
 
   const { res } = await fetchApi(`/login`, {
@@ -24,7 +28,7 @@ export async function loginAction(
   if (!res.ok) {
     const data = (await res.json().catch(() => null)) as ApiErrorResponse | null;
     const message =
-      data?.message || "E-mail atau password yang anda masukkan salah";
+      data?.message || "E-mail or password is incorrect";
     return { error: message };
   }
 
@@ -39,5 +43,5 @@ export async function loginAction(
     path: "/",
   });
   // ✅ kembalikan status sukses agar client bisa mengarahkan halaman
-  return { success: "Login berhasil" };
+  return { success: "Successfully logged in" };
 }

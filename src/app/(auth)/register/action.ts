@@ -11,8 +11,12 @@ export async function registerAction(
   const result = formSchema.safeParse(Object.fromEntries(formData));
 
   if (!result.success) {
-    const firstError = result.error.issues[0];
-    return { error: firstError.message };
+    const error = result.error.issues[0];
+    const fieldErrors = result.error.flatten().fieldErrors;
+    return {
+      fieldErrors, 
+      error: error.message
+    };
   }
 
   const { res } = await fetchApi(`/register`, {
@@ -29,5 +33,5 @@ export async function registerAction(
 
   const data = await res.json();
   console.log(data);
-  return { success: "Login berhasil", data };
+  return { success: "Successfully registered", data };
 }
