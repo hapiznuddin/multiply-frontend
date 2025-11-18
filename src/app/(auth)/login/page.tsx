@@ -26,6 +26,8 @@ export default function LoginPage() {
         title: "Success!",
         text: "You have successfully logged in.",
         icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
       }).then(() => {
         router.replace("/dashboard");
       });

@@ -1,7 +1,7 @@
 "use server";
 import { ApiErrorResponse } from "@/app/types/errorType";
 import { cookies } from "next/headers";
-import { fetchApi } from "@/lib/serverFetch";
+import {  serverFetch } from "@/lib/serverFetch";
 import { formSchema } from "./schema";
 
 export async function loginAction(
@@ -20,7 +20,7 @@ export async function loginAction(
     };
   }
 
-  const { res } = await fetchApi(`/login`, {
+  const res  = await serverFetch(`/login`, {
     method: "POST",
     body: JSON.stringify({...result.data}),
   });
@@ -42,6 +42,7 @@ export async function loginAction(
     maxAge: 3600 * 24 * 3, // 3 hari
     path: "/",
   });
+
   // ✅ kembalikan status sukses agar client bisa mengarahkan halaman
-  return { success: "Successfully logged in" };
+  return { success: "Successfully logged in", redirect: "/dashboard" };
 }

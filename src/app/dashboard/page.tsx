@@ -1,24 +1,17 @@
-import { redirect } from "next/navigation";
-import type { UserType } from "../types/userType";
-import { getUserAction } from "./action";
 
-export default async function Dashboard() {
-  const result = await getUserAction();
-
-  if ("error" in result || !result.user) {
-    redirect("/login");
-  }
-
-  const user = (result.user ?? result.data) as UserType;
-
+export const dynamic = "force-dynamic";
+export default function Page() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50">
-      <div className="bg-white p-6 rounded-xl shadow">
-        <h1 className="text-2xl font-bold mb-2">
-          Selamat datang, {user.name} 👋
-        </h1>
-        <p className="text-sm text-gray-600">Email: {user.email}</p>
-      </div>
+    <div>
+        
+        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+          <div className="grid auto-rows-min gap-4 md:grid-cols-3">
+            <div className="bg-amber-400 aspect-video rounded-xl" />
+            <div className="bg-amber-400 aspect-video rounded-xl" />
+            <div className="bg-amber-400 aspect-video rounded-xl" />
+          </div>
+            <div className="bg-amber-400 aspect-video rounded-xl" />
+        </div>
     </div>
-  );
+  )
 }

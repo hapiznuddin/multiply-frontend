@@ -26,6 +26,8 @@ export default function RegisterPage() {
         title: "Success!",
         text: "You have successfully registered.",
         icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
       }).then(() => {
         router.replace("/login");
       });

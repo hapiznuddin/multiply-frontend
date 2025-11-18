@@ -1,6 +1,6 @@
 "use server";
 import { ApiErrorResponse } from "@/app/types/errorType";
-import { fetchApi } from "@/lib/serverFetch";
+import { serverFetch } from "@/lib/serverFetch";
 import { formSchema } from "./schema";
 
 export async function registerAction(
@@ -19,7 +19,7 @@ export async function registerAction(
     };
   }
 
-  const { res } = await fetchApi(`/register`, {
+  const  res  = await serverFetch(`/register`, {
     method: "POST",
     body: JSON.stringify({ ...result.data }),
   });

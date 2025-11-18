@@ -1,7 +1,6 @@
 export function getDashboardRoute(role: string) {
 	switch (role) {
-		case 'teacher': return '/teacher';
-		case 'user': return '/dashboard';
+		case 'teacher': return '/dashboard';
 		default: return '/login';
 	}
 }
