@@ -1,5 +1,6 @@
 "use server";
 
+import { UserType } from "@/app/types/userType";
 // import { UserType } from "@/app/types/userType";
 import { cookies } from "next/headers";
 
@@ -34,19 +35,19 @@ export async function serverFetch(
   });
 }
 
-// export async function fetchUser<T = UserType>(): Promise<T | null> {
-//   const res = await serverFetch("/get-user", { method: "GET" });
-//   if (!res.ok) return null as T | null;
-//   return (await res.json()) as T;
-// }
+export async function fetchUser<T = UserType>(): Promise<T | null> {
+  const res = await serverFetch("/get-user", { method: "GET" });
+  if (!res.ok) return null as T | null;
+  return (await res.json()) as T;
+}
 
-// export async function fetchApi<TUser = UserType>(
-//   path: string,
-//   init?: RequestInit
-// ): Promise<{ res: Response; user: TUser | null }> {
-//   const [res, user] = await Promise.all([
-//     serverFetch(path, init),
-//     fetchUser<TUser>(),
-//   ]);
-//   return { res, user };
-// }
+export async function fetchApi<TUser = UserType>(
+  path: string,
+  init?: RequestInit
+): Promise<{ res: Response; user: TUser | null }> {
+  const [res, user] = await Promise.all([
+    serverFetch(path, init),
+    fetchUser<TUser>(),
+  ]);
+  return { res, user };
+}

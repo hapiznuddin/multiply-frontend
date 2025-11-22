@@ -7,7 +7,7 @@ type ApiErrorResponse = {
 };
 
 export async function getUserAction() {
-  const { res, user } = await fetchApi("/get-user", {
+  const { res, user } = await fetchApi("/rooms", {
     method: "GET",
   });
 

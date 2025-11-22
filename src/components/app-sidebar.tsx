@@ -19,7 +19,7 @@ import { UserType } from "@/app/types/userType";
 const items = [
   {
     title: "Create Room",
-    url: "#",
+    url: "/dashboard/create-room",
     icon: HousePlus,
   },
   {

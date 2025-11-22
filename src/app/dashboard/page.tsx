@@ -1,7 +1,14 @@
+import { Card } from "@/components/ui/card";
 import Image from "next/image";
+import { getUserAction } from "./action";
+import { Room } from "../types/roomType";
+import { Button } from "@/components/ui/button";
 
 export const dynamic = "force-dynamic";
-export default function Page() {
+export default async function Page() {
+  const rooms = await getUserAction();
+  console.log(rooms);
+
   return (
     <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
       <div className="grid auto-rows-min gap-4 md:grid-cols-3">
@@ -27,12 +34,26 @@ export default function Page() {
           </div>
         </div>
       </div>
-      <div className="bg-amber-400 w-full h-16 rounded-xl" />
-      <div className="bg-amber-400 w-full h-16 rounded-xl" />
-      <div className="bg-amber-400 w-full h-16 rounded-xl" />
-      <div className="bg-amber-400 w-full h-16 rounded-xl" />
-      <div className="bg-amber-400 w-full h-16 rounded-xl" />
-      <div className="bg-amber-400 w-full h-16 rounded-xl" />
+      <Card className="flex flex-col gap-4 px-4 border">
+        <h1 className="text-xl font-bold">List of Quiz</h1>
+        {rooms?.data.map((room: Room) => (
+          <Card
+            className="w-full p-4 rounded-xl flex justify-between"
+            key={room.id}
+          >
+            <div className="flex justify-between items-center">
+              <div className="flex flex-col">
+                <p className="text-sm">{room.code}</p>
+                <h1 className="text-lg font-bold">{room.title}</h1>
+              </div>
+              <div className="flex gap-2">
+                <Button>Start</Button>
+                <Button variant="secondaryHome" className="">Detail</Button>
+              </div>
+            </div>
+          </Card>
+        ))}
+      </Card>
     </div>
   );
 }
