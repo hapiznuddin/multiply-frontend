@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { HousePlus, LayoutList } from "lucide-react";
+import { House, HousePlus, LayoutList } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
 import { NavUser } from "@/components/nav-user";
@@ -18,13 +18,18 @@ import { UserType } from "@/app/types/userType";
 // This is sample data.
 const items = [
   {
+    title: "Home",
+    url: "/dashboard",
+    icon: House,
+  },
+  {
     title: "Create Room",
     url: "/dashboard/create-room",
     icon: HousePlus,
   },
   {
-    title: "List Quizzes",
-    url: "#",
+    title: "List Quizes",
+    url: "/dashboard/quizes",
     icon: LayoutList,
   },
 ];

@@ -22,10 +22,8 @@ export default async function DashboardLayout({
     <SidebarProvider>
       <AppSidebar user={user} />
       <SidebarInset>
-        <main>
-          <NavHeader />
-          {children}
-        </main>
+        <NavHeader />
+        <main className="w-full max-w-6xl mx-auto">{children}</main>
       </SidebarInset>
     </SidebarProvider>
   );

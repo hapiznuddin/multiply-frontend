@@ -9,6 +9,7 @@ type ApiErrorResponse = {
 export async function getUserAction() {
   const { res, user } = await fetchApi("/rooms", {
     method: "GET",
+    next: { tags: ["rooms"] },
   });
 
   if (!res.ok) {
