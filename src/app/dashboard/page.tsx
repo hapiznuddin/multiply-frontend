@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 export const dynamic = "force-dynamic";
 export default async function Page() {
   const rooms = await getUserAction();
-  console.log(rooms);
 
   return (
     <div className="flex flex-1 flex-col gap-4 p-4 pt-0">

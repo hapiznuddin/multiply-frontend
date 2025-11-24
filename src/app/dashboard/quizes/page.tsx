@@ -15,7 +15,7 @@ export default async function QuizPage() {
         <h1 className="text-2xl font-bold">List Quizes</h1>
         <CreateQuiz />
       </div>
-      <Card className="flex flex-col gap-4 p-4">
+      <Card className="flex flex-col gap-2 p-4">
         <div className="flex justify-between items-center p-2">
           <p>Title Quiz</p>
           <p>Description</p>
@@ -25,13 +25,13 @@ export default async function QuizPage() {
         {materials.data.map((material: Material) => (
           <Link href={`/dashboard/quizes/${material.id}`} key={material.id}>
             <div className="flex justify-between items-center gap-4 hover:bg-slate-100 p-2 rounded-md ">
-              <div>
+              <div className="p-2 rounded-md w-full max-w-sm">
                 <h2 className="text-lg font-medium">{material.title}</h2>
                 <p className="text-xs text-slate-400">
                   {material.questions_count} Question
                 </p>
               </div>
-              <p className="text-sm text-slate-600 w-full max-w-sm line-clamp-2">
+              <p className="text-sm text-slate-700 w-full max-w-sm line-clamp-2">
                 {material.description}
               </p>
               <div className="flex gap-2">

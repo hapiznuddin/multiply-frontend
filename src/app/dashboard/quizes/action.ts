@@ -32,7 +32,6 @@ export async function materialAction(
 ) {
   // ✅ Validasi input dengan Zod
   const result = formSchemaMaterial.safeParse(Object.fromEntries(formData));
-  console.log(result.data);
 
   if (!result.success) {
     const error = result.error.issues[0];

@@ -14,7 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { materialAction } from "./action";
 import Swal from "sweetalert2";
 import { Spinner } from "@/components/ui/spinner";
@@ -25,24 +25,26 @@ export default function CreateQuiz() {
     error: "",
   });
 
-  if (state?.error) {
-    Swal.fire({
-      title: "Error!",
-      text: state.error,
-      icon: "error",
-      confirmButtonText: "Try Again",
-    })
-  }
-
-  if (state?.success) {
-    Swal.fire({
-      title: "Success!",
-      text: state.success,
-      icon: "success",
-      showConfirmButton: false,
-      timer: 1500,
-    })
-  }
+  useEffect(() => {
+      if (state?.success) {
+        Swal.fire({
+          title: "Success!",
+          text: "You have successfully created a material.",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+  
+      if (state?.error) {
+        Swal.fire({
+          title: "Error!",
+          text: state.error,
+          icon: "error",
+          confirmButtonText: "Try Again",
+        });
+      }
+    }, [state]);
   
   return (
     <Dialog>
@@ -60,11 +62,11 @@ export default function CreateQuiz() {
           <div className="flex flex-col items-center gap-4 w-full">
             <div className="grid flex-1 gap-2 w-full">
               <Label htmlFor="title">Title</Label>
-              <Input id="title" placeholder="Type your title" />
+              <Input id="title" name="title" placeholder="Type your title" />
             </div>
             <div className="grid flex-1 gap-2 w-full">
               <Label htmlFor="description">Description</Label>
-              <Textarea id="description" placeholder="Type your description" />
+              <Textarea id="description" name="description" placeholder="Type your description" />
             </div>
           </div>
           <DialogFooter className="sm:justify-start">
