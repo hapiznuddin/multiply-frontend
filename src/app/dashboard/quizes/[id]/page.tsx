@@ -35,7 +35,7 @@ export default async function DetailQuiz({
           <Button>Create Question</Button>
         </Link>
       </div>
-      <div className="border rounded-lg">
+      <div className="border rounded-lg mb-8">
         <Table>
           <TableHeader>
             <TableRow className="border-b">

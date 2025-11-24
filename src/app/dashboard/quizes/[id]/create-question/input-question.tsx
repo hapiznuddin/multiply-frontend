@@ -14,6 +14,8 @@ import {
 import { useActionState, useEffect, useState } from "react";
 import { questionAction } from "./action";
 import Swal from "sweetalert2";
+import { Spinner } from "@/components/ui/spinner";
+import { useRouter } from "next/navigation";
 
 export type Option = {
   option_text: string;
@@ -27,6 +29,7 @@ export default function InputQuestion({
   id: number;
   title: string;
 }) {
+  const router = useRouter();
   const [state, formAction, isPending] = useActionState(questionAction, {
     fieldErrors: {},
     error: "",
@@ -40,6 +43,8 @@ export default function InputQuestion({
         icon: "success",
         showConfirmButton: false,
         timer: 1500,
+      }).then(() => {
+        router.push(`/dashboard/quizes/${id}`);
       });
     }
 
@@ -51,7 +56,7 @@ export default function InputQuestion({
         confirmButtonText: "Try Again",
       });
     }
-  }, [state]);
+  }, [state, router, id]);
 
   const [type, setType] = useState("multiple_choice");
 
@@ -110,11 +115,22 @@ export default function InputQuestion({
             {options.map((opt, i) => (
               <div key={i} className="border p-2 flex flex-col gap-2">
                 <Checkbox
-                  checked={opt.is_correct}
-                  onCheckedChange={(v) =>
-                    updateOption(i, "is_correct", v === true)
+                  checked={opt.is_correct as boolean}
+                  name={`options[${i}][is_correct]`}
+                  onCheckedChange={(checked) =>
+                    updateOption(i, "is_correct", checked as boolean)
                   }
                 />
+                {/* <input
+                  type="checkbox"
+                  name={`options[${i}][is_correct]`}
+                  value="1"
+                  className="w-6 h-6 rounded border border-gray-300 bg-gray-50 focus:ring-1 focus:ring-primary-300 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600"
+                  checked={opt.is_correct}
+                  onChange={(e) =>
+                    updateOption(i, "is_correct", e.target.checked)
+                  }
+                /> */}
 
                 <Input
                   type="text"
@@ -132,11 +148,12 @@ export default function InputQuestion({
                   value={opt.option_text}
                 />
 
+                {/* 
                 <input
                   type="hidden"
                   name={`options[${i}][is_correct]`}
                   value={opt.is_correct ? "1" : "0"}
-                />
+                /> */}
               </div>
             ))}
           </div>
@@ -151,17 +168,16 @@ export default function InputQuestion({
             />
           </div>
         )}
-        <Button type="submit">Save Question</Button>
-        <button
-  type="button"
-  onClick={() => {
-    const form = document.querySelector("form");
-    const fd = new FormData(form!);
-    console.log("CLIENT FORMDATA:", Object.fromEntries(fd.entries()));
-  }}
->
-  DEBUG FORM
-</button>
+        <Button type="submit" className="w-full mt-4" disabled={isPending}>
+          {isPending ? (
+            <div className="flex items-center justify-center gap-2">
+              <Spinner className="size-6" />
+              <p>Loading...</p>
+            </div>
+          ) : (
+            "Save Question"
+          )}
+        </Button>
       </Card>
     </form>
   );
