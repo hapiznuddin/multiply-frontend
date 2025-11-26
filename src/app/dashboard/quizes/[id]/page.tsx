@@ -7,6 +7,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { getMaterialIdAction } from "./action";
+import DeleteQuestionButton from "./DeleteQuestionButton";
 import { Question } from "@/app/types/quizType";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
@@ -44,16 +45,19 @@ export default async function DetailQuiz({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data?.questions?.map((question: Question, index: number) => (
+            {data?.questions?.length > 0 ? data?.questions?.map((question: Question, index: number) => (
               <TableRow key={question.id} className="border-b">
-                <TableCell className="p-4">
-                  <div className="flex flex-col gap-4">
-                    <p className="text-xs text-slate-500">
-                      {index + 1}.{" "}
-                      {question.type === "multiple_choice"
-                        ? "Multiple Choice"
-                        : "Input"}
-                    </p>
+                <TableCell>
+                  <div className="flex flex-col gap-4 p-4">
+                    <div className="flex items-center w-full justify-between">
+                      <p className="text-xs text-slate-500">
+                        {index + 1}.{" "}
+                        {question.type === "multiple_choice"
+                          ? "Multiple Choice"
+                          : "Input"}
+                      </p>
+                        <DeleteQuestionButton id={question.id} />
+                    </div>
                     <p className="font-bold text-base">
                       {question.question_text}
                     </p>
@@ -65,7 +69,7 @@ export default async function DetailQuiz({
                       <div className="grid grid-cols-2 gap-4">
                         {question.options.map((option) => (
                           <div
-                            className="flex items-center gap-2 "
+                            className="flex items-center gap-2"
                             key={option.id}
                           >
                             <Checkbox
@@ -82,7 +86,13 @@ export default async function DetailQuiz({
                   </div>
                 </TableCell>
               </TableRow>
-            ))}
+            )) : (
+              <TableRow>
+                <TableCell colSpan={3} className="h-24 text-center">
+                  No questions created
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </div>

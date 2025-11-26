@@ -23,11 +23,6 @@ const items = [
     icon: House,
   },
   {
-    title: "Create Room",
-    url: "/dashboard/create-room",
-    icon: HousePlus,
-  },
-  {
     title: "List Quizes",
     url: "/dashboard/quizes",
     icon: LayoutList,

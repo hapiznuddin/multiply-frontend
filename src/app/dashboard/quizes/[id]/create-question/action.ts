@@ -9,12 +9,8 @@ export async function questionAction(
   _prevState: { error?: string; success?: string },
   formData: FormData
 ) {
-  console.log("RAW FORMDATA:", Object.fromEntries(formData.entries()));
-
-  // STEP 1 → Parse nested fields: options[0][option_text] => array
+ // STEP 1 → Parse nested fields: options[0][option_text] => array
   const parsedPayload = parseNestedFormData(formData);
-
-  console.log("PARSED PAYLOAD:", parsedPayload);
 
   // STEP 2 → Validate using Zod (now options[] is correct)
   const result = formSchemaQuestion.safeParse(parsedPayload);

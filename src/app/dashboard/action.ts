@@ -7,19 +7,31 @@ type ApiErrorResponse = {
 };
 
 export async function getUserAction() {
-  const { res, user } = await fetchApi("/rooms", {
-    method: "GET",
-    next: { tags: ["rooms"] },
-  });
+  const [rooms, quizCount, roomCount] = await Promise.all([
+    fetchApi("/rooms", {
+      method: "GET",
+      next: { tags: ["rooms"] },
+    }),
+    fetchApi("/materials/count", {
+      method: "GET",
+      next: { tags: ["quiz-count"] },
+    }),
+    fetchApi("/rooms/count", {
+      method: "GET",
+      next: { tags: ["room-count"] },
+    }),
+  ]);
 
-  if (!res.ok) {
-    const data = (await res
+  if (!rooms.res.ok || !quizCount.res.ok || !roomCount.res.ok) {
+    const data = (await rooms.res
       .json()
       .catch(() => null)) as ApiErrorResponse | null;
 
     return { error: data?.message || "Gagal memuat data pengguna" };
   }
 
-  const data = await res.json();
-  return { data, user };
+  const roomsData = await rooms.res.json();
+  const quizCountData = await quizCount.res.json();
+  const roomCountData = await roomCount.res.json();
+  return { roomsData, quizCountData, roomCountData };
 }
