@@ -20,7 +20,6 @@ export default async function DetailQuiz({
 }) {
   const { id } = await params;
   const { data } = await getMaterialIdAction(id);
-  // console.log(data);
 
   return (
     <div className="p-4 w-full flex flex-col gap-4">

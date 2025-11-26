@@ -22,7 +22,7 @@ export default async function QuizPage() {
           <div className="w-24"></div>
         </div>
         <Separator />
-        {materials.data.map((material: Material) => (
+        {materials?.data?.map((material: Material) => (
           <Link href={`/dashboard/quizes/${material.id}`} key={material.id}>
             <div className="flex justify-between items-center gap-4 hover:bg-slate-100 p-2 rounded-md ">
               <div className="p-2 rounded-md w-full max-w-sm">

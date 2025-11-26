@@ -2,6 +2,7 @@ import { ApiErrorResponse } from "@/app/types/errorType";
 import { fetchApi } from "@/lib/serverFetch";
 
 export async function getMaterialIdAction(id: number) {
+  console.log(id);
   const { res, user } = await fetchApi(`/material/${id}/questions`, {
     method: "GET",
     next: { tags: ["questions"] },

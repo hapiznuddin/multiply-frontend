@@ -73,6 +73,13 @@ export default function InputQuestion({
     value: string | boolean
   ) => {
     const copy = [...options];
+
+    if (field === "is_correct" && value === true) {
+      copy.forEach((opt, i) => {
+        copy[i] = { ...opt, is_correct: false };
+      });
+    }
+
     copy[index] = { ...copy[index], [field]: value };
     setOptions(copy);
   };
@@ -107,16 +114,20 @@ export default function InputQuestion({
         <Input
           name="question_text"
           type="text"
-          className="w-full h-72 text-center bg-violet-300 text-xl"
+          className="w-full h-72 text-center text-xl"
           placeholder="Type your question here"
         />
         {type === "multiple_choice" && (
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             {options.map((opt, i) => (
-              <div key={i} className="border p-2 flex flex-col gap-2">
+              <div
+                key={i}
+                className="border p-2 flex flex-col gap-2 rounded-lg shadow-sm"
+              >
                 <Checkbox
                   checked={opt.is_correct as boolean}
                   name={`options[${i}][is_correct]`}
+                  className="w-6 h-6"
                   onCheckedChange={(checked) =>
                     updateOption(i, "is_correct", checked as boolean)
                   }
@@ -135,10 +146,11 @@ export default function InputQuestion({
                 <Input
                   type="text"
                   value={opt.option_text}
+                  className="w-full h-full min-h-48 text-center border-0 shadow-none"
                   onChange={(e) =>
                     updateOption(i, "option_text", e.target.value)
                   }
-                  placeholder={`Option ${i + 1}`}
+                  placeholder={`Type your option here`}
                 />
 
                 {/* HIDDEN INPUTS — FIXED */}
@@ -163,7 +175,7 @@ export default function InputQuestion({
           <div>
             <Input
               name="correct_answer"
-              className="w-full text-center"
+              className="w-full text-center h-full min-h-48"
               placeholder="Type the correct answer"
             />
           </div>
