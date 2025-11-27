@@ -4,11 +4,13 @@ import { getUserAction } from "./action";
 import { Room } from "../types/roomType";
 import { Button } from "@/components/ui/button";
 import CreateRoom from "./create-room";
+import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 export default async function Page() {
-  const { roomsData, quizCountData, roomCountData } = await getUserAction();
-  console.log(roomsData);
+  const { roomsData, quizCountData, roomCountData, materialsData } =
+    await getUserAction();
+
   return (
     <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
       <div className="grid auto-rows-min gap-4 md:grid-cols-3">
@@ -37,11 +39,11 @@ export default async function Page() {
       <Card className="flex flex-col gap-4 px-4 border">
         <div className="flex justify-between items-center">
           <h1 className="text-xl font-bold">List of Quiz</h1>
-          <CreateRoom />
+          <CreateRoom data={materialsData} />
         </div>
         {roomsData?.map((room: Room) => (
           <Card
-            className="w-full p-4 rounded-xl flex justify-between"
+            className="w-full p-4 rounded-xl flex justify-between hover:bg-slate-50"
             key={room.id}
           >
             <div className="flex justify-between items-center">
@@ -51,8 +53,8 @@ export default async function Page() {
               </div>
               <div className="flex gap-2">
                 <Button>Play Now</Button>
-                <Button variant="secondary" className="">
-                  Detail
+                <Button variant="secondary" asChild>
+                  <Link href={`/dashboard/room/${room.id}`}>Detail</Link>
                 </Button>
               </div>
             </div>

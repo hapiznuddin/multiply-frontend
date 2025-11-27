@@ -17,23 +17,29 @@ export default function Home() {
         </div>
         <div className="flex gap-8">
           <Link href="/register">
-            <Button size="lg" variant='defaultHome' className="h-full py-3 px-8 w-56">
+            <Button
+              size="lg"
+              variant="defaultHome"
+              className="h-full py-3 px-8 w-56"
+            >
               <div className="flex flex-col items-start justify-start">
                 <p className="text-lg">Teacher</p>
                 <p className="text-3xl font-black ">Sign Up</p>
               </div>
             </Button>
           </Link>
-          <Button 
-            size="lg"
-            variant="secondaryHome"
-            className="h-full py-3 px-8 w-56"
-          >
-            <div className="flex flex-col items-start justify-start">
-              <p className="text-lg">Student</p>
-              <p className="text-3xl font-black ">Join Code</p>
-            </div>
-          </Button>
+          <Link href="/join">
+            <Button
+              size="lg"
+              variant="secondaryHome"
+              className="h-full py-3 px-8 w-56"
+            >
+              <div className="flex flex-col items-start justify-start">
+                <p className="text-lg">Student</p>
+                <p className="text-3xl font-black ">Join Code</p>
+              </div>
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

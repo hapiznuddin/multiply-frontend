@@ -1,3 +1,4 @@
+"use client";
 import {
   Dialog,
   DialogClose,
@@ -18,8 +19,40 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Material } from "../types/quizType";
+import { useActionState } from "react";
+import { createRoomAction } from "./action";
+import Swal from "sweetalert2";
+import { useEffect } from "react";
+import { Spinner } from "@/components/ui/spinner";
 
-export default function CreateRoom() {
+export default function CreateRoom({ data }: { data: Material[] }) {
+  const [state, formAction, isPending] = useActionState(createRoomAction, {
+    fieldErrors: {},
+    error: "",
+  });
+
+  useEffect(() => {
+    if (state?.success) {
+      Swal.fire({
+        title: "Success!",
+        text: "You have successfully created a room.",
+        icon: "success",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+
+    if (state?.error) {
+      Swal.fire({
+        title: "Error!",
+        text: state.error,
+        icon: "error",
+        confirmButtonText: "Try Again",
+      });
+    }
+  }, [state]);
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -32,7 +65,7 @@ export default function CreateRoom() {
             Create a new room to start a quiz.
           </DialogDescription>
         </DialogHeader>
-        <form action="" className="flex flex-col gap-4">
+        <form action={formAction} className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
             <Label htmlFor="title">Room Name</Label>
             <Input placeholder="Type room name" name="title" id="title" />
@@ -44,9 +77,11 @@ export default function CreateRoom() {
                 <SelectValue placeholder="Select a material" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="1">Material 1</SelectItem>
-                <SelectItem value="2">Material 2</SelectItem>
-                <SelectItem value="3">Material 3</SelectItem>
+                {data.map((material, i) => (
+                  <SelectItem key={i} value={material.id.toString()}>
+                    {material.title}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>
@@ -63,7 +98,16 @@ export default function CreateRoom() {
             <DialogClose asChild>
               <Button variant="destructive">Cancel</Button>
             </DialogClose>
-            <Button type="submit">Submit</Button>
+            <Button type="submit" disabled={isPending}>
+              {isPending ? (
+                <div className="flex items-center justify-center gap-2">
+                  <Spinner className="size-6" />
+                  <p>Loading...</p>
+                </div>
+              ) : (
+                "Save"
+              )}
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>
