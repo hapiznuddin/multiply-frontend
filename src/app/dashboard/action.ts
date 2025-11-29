@@ -9,26 +9,36 @@ type ApiErrorResponse = {
 };
 
 export async function getUserAction() {
-  const [rooms, quizCount, roomCount, materials] = await Promise.all([
-    fetchApi("/rooms", {
-      method: "GET",
-      next: { tags: ["rooms"] },
-    }),
-    fetchApi("/materials/count", {
-      method: "GET",
-      next: { tags: ["quiz-count"] },
-    }),
-    fetchApi("/rooms/count", {
-      method: "GET",
-      next: { tags: ["room-count"] },
-    }),
-    fetchApi("/materials", {
-      method: "GET",
-      next: { tags: ["materials"] },
-    }),
-  ]);
+  const [rooms, quizCount, roomCount, materials, participantCount] =
+    await Promise.all([
+      fetchApi("/rooms", {
+        method: "GET",
+        next: { tags: ["rooms"] },
+      }),
+      fetchApi("/materials/count", {
+        method: "GET",
+        next: { tags: ["materials"] },
+      }),
+      fetchApi("/rooms/count", {
+        method: "GET",
+        next: { tags: ["rooms"] },
+      }),
+      fetchApi("/materials", {
+        method: "GET",
+        next: { tags: ["materials"] },
+      }),
+      fetchApi("/rooms/participants/count", {
+        method: "GET",
+        next: { tags: ["rooms"] },
+      }),
+    ]);
 
-  if (!rooms.res.ok || !quizCount.res.ok || !roomCount.res.ok || !materials.res.ok) {
+  if (
+    !rooms.res.ok ||
+    !quizCount.res.ok ||
+    !materials.res.ok ||
+    !participantCount.res.ok
+  ) {
     const data = (await rooms.res
       .json()
       .catch(() => null)) as ApiErrorResponse | null;
@@ -40,11 +50,19 @@ export async function getUserAction() {
   const quizCountData = await quizCount.res.json();
   const roomCountData = await roomCount.res.json();
   const materialsData = await materials.res.json();
-  return { roomsData, quizCountData, roomCountData, materialsData };
+  const participantCountData = await participantCount.res.json();
+
+  return {
+    roomsData,
+    quizCountData,
+    roomCountData,
+    materialsData,
+    participantCountData,
+  };
 }
 
 export async function createRoomAction(
- _prevState: { error?: string; success?: string },
+  _prevState: { error?: string; success?: string },
   formData: FormData
 ) {
   // ✅ Validasi input dengan Zod
@@ -54,12 +72,12 @@ export async function createRoomAction(
     const error = result.error.issues[0];
     const fieldErrors = result.error.flatten().fieldErrors;
     return {
-      fieldErrors, 
+      fieldErrors,
       error: error.message,
     };
   }
 
-  const  res  = await serverFetch(`/rooms`, {
+  const res = await serverFetch(`/rooms`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -69,14 +87,15 @@ export async function createRoomAction(
   });
 
   if (!res.ok) {
-    const data = (await res.json().catch(() => null)) as ApiErrorResponse | null;
-    const message =
-      data?.message;
+    const data = (await res
+      .json()
+      .catch(() => null)) as ApiErrorResponse | null;
+    const message = data?.message;
     return { error: message };
   }
   revalidateTag("rooms");
   revalidateTag("room-count");
   const data = await res.json();
   console.log(data);
-  return { success: 'Successfully created', data };
+  return { success: "Successfully created", data };
 }

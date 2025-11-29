@@ -1,6 +1,7 @@
 "use server";
 import { ApiErrorResponse } from "@/app/types/errorType";
 import { fetchApi } from "@/lib/serverFetch";
+import { revalidateTag } from "next/cache";
 
 export async function getGameQuestions(id: number) {
   const { res } = await fetchApi(`/rooms/${id}/game/questions`, {
@@ -41,6 +42,8 @@ export async function submitAnswer(
     return { error: data?.message || "Failed to submit answer" };
   }
 
+  revalidateTag("game");
+  revalidateTag("rooms");
   const data = await res.json();
   return { data };
 }
@@ -57,6 +60,8 @@ export async function exitRoom(participantId: number) {
     return { error: data?.message || "Failed to exit room" };
   }
 
+  revalidateTag("game");
+  revalidateTag("rooms");
   const data = await res.json();
   return { data };
 }

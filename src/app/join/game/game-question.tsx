@@ -158,105 +158,113 @@ export default function GameQuestion({
   }
 
   return (
-    <div className="flex flex-col gap-8 bg-white/10 backdrop-blur-xs shadow-md rounded-xl mx-auto py-12 px-6 w-full max-w-2xl border-2 border-white/20 text-white">
+    <div className="flex flex-col gap-8 w-full">
       {/* Score and Rank Navbar */}
-      <div className="flex justify-between items-center bg-white/5 rounded-lg px-4 py-3 border border-white/10">
-        <div className="flex gap-6">
-          <div className="flex flex-col">
-            <span className="text-xs text-white/60">Score</span>
-            <span className="text-2xl font-bold">{score}</span>
+      <div className="fixed top-0 left-0 right-0 z-50 bg-white/5 rounded-lg px-4 py-3 border border-white/10">
+        <div className="flex justify-between items-center mb-w-full max-w-5xl mx-auto">
+          <div className="flex gap-6">
+            <div className="flex flex-col">
+              <span className="text-sm text-white/90">Score</span>
+              <span className="text-2xl font-bold text-white">{score}</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-sm text-white/90">Rank</span>
+              <span className="text-2xl font-bold text-white">#{rank || "-"}</span>
+            </div>
           </div>
-          <div className="flex flex-col">
-            <span className="text-xs text-white/60">Rank</span>
-            <span className="text-2xl font-bold">#{rank || "-"}</span>
+          <div className="flex items-center gap-4">
+            <h2 className="text-lg font-bold text-white">
+              Question {currentQuestionIndex + 1} / {questions.length}
+            </h2>
+            <Button
+              variant="destructive"
+              size="sm"
+              onClick={handleExit}
+              className="bg-red-500 hover:bg-red-600"
+            >
+              Exit
+            </Button>
           </div>
-        </div>
-        <div className="flex items-center gap-4">
-          <h2 className="text-lg font-bold">
-            Question {currentQuestionIndex + 1} / {questions.length}
-          </h2>
-          <Button
-            variant="destructive"
-            size="sm"
-            onClick={handleExit}
-            className="bg-red-500 hover:bg-red-600"
-          >
-            Exit
-          </Button>
         </div>
       </div>
 
-      <div className="text-2xl font-bold text-center">
-        {currentQuestion.question_text}
-      </div>
+      <div className="flex flex-col gap-8 bg-white/10 backdrop-blur-xs shadow-md rounded-xl mx-auto py-12 px-6 w-full max-w-5xl border-2 border-white/20 text-white">
+        <div className="text-2xl font-bold text-center">
+          {currentQuestion.question_text}
+        </div>
 
-      <div className="flex flex-col gap-4">
-        {currentQuestion.type === "multiple_choice" ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {currentQuestion.options?.map((option) => {
-              const isSelected = answer === option.id;
-              const isCorrectOption = correctAnswerId === option.id;
+        <div className="flex flex-col gap-4">
+          {currentQuestion.type === "multiple_choice" ? (
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              {currentQuestion.options?.map((option) => {
+                const isSelected = answer === option.id;
+                const isCorrectOption = correctAnswerId === option.id;
 
-              let buttonClass = "";
-              if (showFeedback) {
-                if (isSelected && isCorrectAnswer) {
-                  // User selected correct answer - show green
-                  buttonClass =
-                    "bg-green-500 text-white hover:bg-green-600 border-green-500";
-                } else if (isSelected && !isCorrectAnswer) {
-                  // User selected wrong answer - show red
-                  buttonClass =
-                    "bg-red-500 text-white hover:bg-red-600 border-red-500";
-                } else if (isCorrectOption) {
-                  // Show correct answer in green
-                  buttonClass =
-                    "bg-green-500 text-white hover:bg-green-600 border-green-500";
+                let buttonClass = "";
+                if (showFeedback) {
+                  if (isSelected && isCorrectAnswer) {
+                    // User selected correct answer - show green
+                    buttonClass =
+                      "bg-green-500 text-white hover:bg-green-600 border-green-500";
+                  } else if (isSelected && !isCorrectAnswer) {
+                    // User selected wrong answer - show red
+                    buttonClass =
+                      "bg-red-500 text-white hover:bg-red-600 border-red-500";
+                  } else if (isCorrectOption) {
+                    // Show correct answer in green
+                    buttonClass =
+                      "bg-green-500 text-white hover:bg-green-600 border-green-500";
+                  } else {
+                    buttonClass =
+                      "bg-transparent border-white/20 text-white/50";
+                  }
+                } else if (isSelected) {
+                  buttonClass = "bg-white text-primary hover:bg-white/90";
                 } else {
-                  buttonClass = "bg-transparent border-white/20 text-white/50";
+                  buttonClass =
+                    "bg-white/20 border-white/20 hover:bg-white/30";
                 }
-              } else if (isSelected) {
-                buttonClass = "bg-white text-primary hover:bg-white/90";
-              } else {
-                buttonClass =
-                  "bg-transparent border-white/20 hover:bg-white/10 text-white";
-              }
 
-              return (
-                <Button
-                  key={option.id}
-                  variant={isSelected ? "secondary" : "outline"}
-                  className={`h-auto py-4 text-lg justify-start px-6 ${buttonClass}`}
-                  onClick={() => !showFeedback && setAnswer(option.id)}
-                  disabled={showFeedback}
-                >
-                  {option.option_text}
-                </Button>
-              );
-            })}
-          </div>
-        ) : (
-          <Input
-            type="text"
-            placeholder="Type your answer here..."
-            value={answer as string}
-            onChange={(e) => setAnswer(e.target.value)}
-            className="bg-white/10 border-white/20 text-white placeholder:text-white/50 text-lg h-12"
-          />
-        )}
+                return (
+                  <Button
+                    key={option.id}
+                    variant={isSelected ? "secondary" : "outline"}
+                    className={`text-white text-xl font-bold h-full w-full min-h-32 p-4 ${buttonClass}`}
+                    onClick={() => !showFeedback && setAnswer(option.id)}
+                    disabled={showFeedback}
+                  >
+                    <p className="w-full text-wrap">
+                      {option.option_text}
+                    </p>
+                  </Button>
+                );
+              })}
+            </div>
+          ) : (
+            <Input
+              type="text"
+              placeholder="Type your answer here..."
+              value={answer as string}
+              onChange={(e) => setAnswer(e.target.value)}
+              className="bg-white text-lg h-32 text-center text-black"
+            />
+          )}
+        </div>
+
+        <Button
+          size="lg"
+          onClick={handleAnswerSubmit}
+          disabled={isSubmitting}
+          variant="secondary"
+          className="w-full font-bold text-xl h-14 mt-4"
+        >
+          {isSubmitting
+            ? "Submitting..."
+            : isLastQuestion
+            ? "Finish"
+            : "Next Question"}
+        </Button>
       </div>
-
-      <Button
-        size="lg"
-        onClick={handleAnswerSubmit}
-        disabled={isSubmitting}
-        className="w-full bg-white text-primary hover:bg-white/90 font-bold text-xl h-14 mt-4"
-      >
-        {isSubmitting
-          ? "Submitting..."
-          : isLastQuestion
-          ? "Finish"
-          : "Next Question"}
-      </Button>
     </div>
   );
 }
