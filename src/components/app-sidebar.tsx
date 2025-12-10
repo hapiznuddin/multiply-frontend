@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { House, LayoutList } from "lucide-react";
+import { BookOpenTextIcon, House, LayoutList } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
 import { NavUser } from "@/components/nav-user";
@@ -26,6 +26,11 @@ const items = [
     title: "List Quizes",
     url: "/dashboard/quizes",
     icon: LayoutList,
+  },  
+  {
+    title: "Learning Corner",
+    url: "/dashboard/learning-corner",
+    icon: BookOpenTextIcon,
   },
 ];
 

@@ -46,7 +46,7 @@ export default async function Page() {
       </div>
       <Card className="flex flex-col gap-4 px-4 border">
         <div className="flex justify-between items-center">
-          <h1 className="text-xl font-bold">List of Quiz</h1>
+          <h1 className="text-xl font-bold">List of Rooms</h1>
           <CreateRoom data={materialsData} />
         </div>
         {roomsData?.map((room: Room) => (
