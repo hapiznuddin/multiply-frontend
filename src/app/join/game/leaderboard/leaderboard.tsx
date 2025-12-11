@@ -1,6 +1,6 @@
-'use client';
+"use client";
 import { Crown } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/embededVideo";
 import Image from "next/image";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
@@ -34,56 +34,56 @@ export default function Leaderboard({
       </div>
       <ScrollArea className="h-120">
         <div className="flex flex-col gap-2 px-4">
-        {sortedData.map((item, index) => {
-          const rank = index + 1;
-          let RankIcon = null;
-          let rankColor = "text-gray-500";
+          {sortedData.map((item, index) => {
+            const rank = index + 1;
+            let RankIcon = null;
+            let rankColor = "text-gray-500";
 
-          if (rank === 1) {
-            RankIcon = (
-              <Crown className="w-6 h-6 text-amber-600 fill-amber-600" />
-            );
-            rankColor = "text-amber-600";
-          } else if (rank === 2) {
-            RankIcon = (
-              <Crown className="w-6 h-6 text-gray-500 fill-gray-500" />
-            );
-            rankColor = "text-gray-500";
-          } else if (rank === 3) {
-            RankIcon = (
-              <Crown className="w-6 h-6 text-amber-700 fill-amber-700" />
-            );
-            rankColor = "text-amber-700";
-          }
+            if (rank === 1) {
+              RankIcon = (
+                <Crown className="w-6 h-6 text-amber-600 fill-amber-600" />
+              );
+              rankColor = "text-amber-600";
+            } else if (rank === 2) {
+              RankIcon = (
+                <Crown className="w-6 h-6 text-gray-500 fill-gray-500" />
+              );
+              rankColor = "text-gray-500";
+            } else if (rank === 3) {
+              RankIcon = (
+                <Crown className="w-6 h-6 text-amber-700 fill-amber-700" />
+              );
+              rankColor = "text-amber-700";
+            }
 
-          return (
-            <div
-              key={item.id}
-              className={cn(
-                "flex items-center justify-between p-4 rounded-lg border-3 bg-card text-card-foreground shadow-sm transition-colors",
-                rank === 1 && "border-amber-600 bg-amber-200",
-                rank === 2 && "border-gray-400 bg-gray-100",
-                rank === 3 && "border-amber-700 bg-amber-100"
-              )}
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-8 flex justify-center font-bold text-lg">
-                  {RankIcon ? (
-                    <span className="text-gray-500">
-                      {RankIcon}#{rank}
-                    </span>
-                  ) : (
-                    <span className="text-gray-500">#{rank}</span>
-                  )}
+            return (
+              <div
+                key={item.id}
+                className={cn(
+                  "flex items-center justify-between p-4 rounded-lg border-3 bg-card text-card-foreground shadow-sm transition-colors",
+                  rank === 1 && "border-amber-600 bg-amber-200",
+                  rank === 2 && "border-gray-400 bg-gray-100",
+                  rank === 3 && "border-amber-700 bg-amber-100"
+                )}
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-8 flex justify-center font-bold text-lg">
+                    {RankIcon ? (
+                      <span className="text-gray-500">
+                        {RankIcon}#{rank}
+                      </span>
+                    ) : (
+                      <span className="text-gray-500">#{rank}</span>
+                    )}
+                  </div>
+                  <p className="font-medium text-lg">{item.participant_name}</p>
                 </div>
-                <p className="font-medium text-lg">{item.participant_name}</p>
+                <p className={cn("font-bold text-lg", rankColor)}>
+                  {item.score} pts
+                </p>
               </div>
-              <p className={cn("font-bold text-lg", rankColor)}>
-                {item.score} pts
-              </p>
-            </div>
-          );
-        })}
+            );
+          })}
         </div>
       </ScrollArea>
       <Button
