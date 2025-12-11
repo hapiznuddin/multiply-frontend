@@ -14,9 +14,6 @@ import {
   Heading1,
   Heading2,
   Heading3,
-  Heading4,
-  Heading5,
-  Heading6,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/embededVideo";
