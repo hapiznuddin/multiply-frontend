@@ -136,12 +136,7 @@ export default async function RoomDetail({
           </ScrollArea>
         </div>
         <div className="flex flex-col gap-4 w-full lg:w-6/12">
-          <div className="flex flex-col gap-2">
-            <h2 className="text-xl font-semibold">Students</h2>
-            <p className="text-sm text-slate-500">
-              List of students in this room
-            </p>
-          </div>
+
           <ParticipantList id={id} />
         </div>
       </div>
