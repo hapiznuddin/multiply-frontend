@@ -9,6 +9,7 @@ export default async function DetailModule({
 }) {
   const { id } = await params;
   const { data } = await getModuleIdAction(id);
+  console.log(data);
 
   const embedUrl = data?.video_url ? getEmbedUrl(data.video_url) : "";
 
@@ -17,7 +18,7 @@ export default async function DetailModule({
       <div className="flex justify-between items-center">
         <div className="flex flex-col gap-2 w-full">
           <h1 className="text-2xl font-bold">{data?.title}</h1>
-          <p>Created by : Admin</p>
+          <p>Created by {data?.user?.name}</p>
         </div>
         <DeleteButton id={data?.id} />
       </div>
