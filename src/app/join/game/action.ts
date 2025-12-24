@@ -28,6 +28,7 @@ export async function submitAnswer(
     room_participant_id: number;
     question_id: number;
     answer: string | number;
+    time_taken?: number;
   }
 ) {
   const { res } = await fetchApi(`/rooms/${roomId}/game/answers`, {

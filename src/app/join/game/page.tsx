@@ -8,11 +8,10 @@ export default async function Game({
 }) {
   const { id } = await searchParams;
   const { data } = await getGameQuestions(id);
-  console.log(data);
   return (
     <div className="w-screen h-screen flex items-center justify-center bg-linear-to-b from-[#8B5DF6] to-[#513690]">
       <div className="pattern" />
-      <GameQuestion questions={data.questions} roomId={id} />
+      <GameQuestion questions={data.questions} roomId={id} room={data.room} />
     </div>
   );
 }

@@ -18,3 +18,19 @@ export async function getLeaderboard(id: number) {
   const data = await res.json();
   return { data };
 }
+
+export async function getParticipantAchievements(participantId: number) {
+  const { res } = await fetchApi(
+    `/rooms/participants/${participantId}/achievements`,
+    {
+      method: "GET",
+    }
+  );
+
+  if (!res.ok) {
+    return { error: "Failed to fetch achievements" };
+  }
+
+  const data = await res.json();
+  return { data };
+}
