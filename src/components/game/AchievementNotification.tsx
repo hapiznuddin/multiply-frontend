@@ -41,7 +41,7 @@ export const AchievementNotification: React.FC<
           onAnimationComplete={() => {
             setTimeout(onClose, 4000);
           }}
-          className="fixed top-20 right-4 z-[9999] bg-white text-black p-4 rounded-xl shadow-2xl border-l-4 border-amber-500 flex items-center gap-4 max-w-sm"
+          className="fixed top-1/2 right-4 z-9999 bg-white text-black p-4 rounded-xl shadow-2xl border-l-4 border-amber-500 flex items-center gap-4 max-w-sm"
         >
           <div className="bg-amber-100 p-2 rounded-lg">
             {getNotificationIcon(achievement.icon)}
