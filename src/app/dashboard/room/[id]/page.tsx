@@ -25,7 +25,6 @@ export default async function RoomDetail({
 }) {
   const { id } = await params;
   const { data } = await getRoomAction(id);
-  console.log(data);
   return (
     <div className="p-4 w-full flex flex-col gap-4">
       <div className="flex gap-2 items-center justify-between">

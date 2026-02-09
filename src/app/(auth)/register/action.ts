@@ -32,6 +32,6 @@ export async function registerAction(
   }
 
   const data = await res.json();
-  console.log(data);
+  // console.log(data);
   return { success: "Successfully registered", data };
 }
