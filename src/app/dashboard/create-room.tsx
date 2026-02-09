@@ -77,8 +77,8 @@ export default function CreateRoom({ data }: { data: Material[] }) {
                 <SelectValue placeholder="Select a material" />
               </SelectTrigger>
               <SelectContent>
-                {data.map((material, i) => (
-                  <SelectItem key={i} value={material.id.toString()}>
+                {data?.map((material) => (
+                  <SelectItem key={material.id} value={material.id.toString()}>
                     {material.title}
                   </SelectItem>
                 ))}

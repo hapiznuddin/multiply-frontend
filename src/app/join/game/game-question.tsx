@@ -44,7 +44,11 @@ export default function GameQuestion({
   } | null>(null);
 
   const [timerKey, setTimerKey] = useState(0);
-  const [startTime, setStartTime] = useState<number>(Date.now());
+  const [startTime, setStartTime] = useState<number>(0);
+
+  useEffect(() => {
+    setStartTime(Date.now());
+  }, []);
 
   const router = useRouter();
   const {
@@ -184,8 +188,8 @@ export default function GameQuestion({
         title: isCorrect
           ? "Benar!"
           : forcedAnswer === "TIMEOUT"
-          ? "Waktu Habis!"
-          : "Kurang Tepat!",
+            ? "Waktu Habis!"
+            : "Kurang Tepat!",
         html: (
           <div className="flex flex-col gap-1 items-center">
             <p className="text-lg font-bold">Skor: {newScore}</p>
@@ -355,8 +359,8 @@ export default function GameQuestion({
           {isSubmitting
             ? "Checking..."
             : isLastQuestion
-            ? "Finish"
-            : "Next Question ➔"}
+              ? "Finish"
+              : "Next Question ➔"}
         </Button>
       </div>
     </div>
