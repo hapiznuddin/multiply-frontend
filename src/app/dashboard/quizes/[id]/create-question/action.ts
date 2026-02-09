@@ -42,6 +42,6 @@ export async function questionAction(
   }
   revalidateTag("questions");
   const data = await res.json();
-  console.log(data);
+  // console.log(data);
   return { success: 'Successfully created', data };
 }

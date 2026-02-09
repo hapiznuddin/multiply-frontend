@@ -6,7 +6,8 @@ export function middleware(req: NextRequest) {
   const token = req.cookies.get("authNextToken")?.value;
   const { pathname } = req.nextUrl;
 
-  const isPublic = PUBLIC_PATHS.includes(pathname);
+  const isPublic =
+    PUBLIC_PATHS.includes(pathname) || pathname.startsWith("/join");
   const isDashboard = pathname.startsWith("/dashboard");
 
   // USER TIDAK LOGIN → akses protected → tendang ke "/"

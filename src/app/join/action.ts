@@ -37,6 +37,6 @@ export async function createRoomJoinAction(
   revalidateTag("rooms");
   revalidateTag("room-count");
   const data = await res.json();
-  console.log(data);
+  // console.log(data);
   return { success: 'Successfully created', data };
 }

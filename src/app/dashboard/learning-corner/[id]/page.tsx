@@ -9,7 +9,7 @@ export default async function DetailModule({
 }) {
   const { id } = await params;
   const { data } = await getModuleIdAction(id);
-  console.log(data);
+  // console.log(data);
 
   const embedUrl = data?.video_url ? getEmbedUrl(data.video_url) : "";
 
