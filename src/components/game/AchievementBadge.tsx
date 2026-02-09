@@ -3,10 +3,8 @@
 import React from "react";
 import {
   Trophy,
-  Star,
   Zap,
   Target,
-  Medal,
   Flame,
   ShieldCheck,
 } from "lucide-react";
