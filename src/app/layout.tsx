@@ -3,7 +3,6 @@ import { Varela_Round } from "next/font/google";
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
 
-
 const varela = Varela_Round({
   variable: "--font-sans",
   weight: "400",
@@ -20,15 +19,14 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
-    <html lang="en">
-      <body className={`${varela.variable}`}>
-            <main>
-              <NextTopLoader color="#FF7900" height={3} showSpinner={true} />
-              {children}
-            </main>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${varela.variable}`} suppressHydrationWarning>
+        <main>
+          <NextTopLoader color="#FF7900" height={3} showSpinner={true} />
+          {children}
+        </main>
       </body>
     </html>
   );
-};
+}
