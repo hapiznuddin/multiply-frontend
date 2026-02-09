@@ -23,7 +23,7 @@ import Swal from "sweetalert2";
 
 export function NavUser({ user }: { user: UserType }) {
   const { isMobile } = useSidebar();
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
   const router = useRouter();
 
   const handleLogout = () => {
